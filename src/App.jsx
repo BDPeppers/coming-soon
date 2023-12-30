@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 function App() {
-  const launchDate = new Date("2024-01-01T00:00:00.000Z");
+  const launchDate = new Date("2024-02-01T00:00:00.000Z");
   const [countdownDate] = useState(launchDate.getTime());
   const [state, setState] = useState({
     days: 0,
