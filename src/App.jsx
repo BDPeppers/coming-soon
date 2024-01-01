@@ -49,14 +49,14 @@ function App() {
       style={{ backgroundColor: "#457D58" }}
       className="grid place-items-center py-24 sm:py-32 lg:px-8 sm:min-h-0"
     >
-      <div className="text-center">
+      <div className="text-center p-4">
         <h1 className="mt-4 text-3xl font-bold tracking-tight text-white sm:text-5xl">
-          Discover the World of Tea: Unveiling Soon at Simply Steeped Tea Blog!
+          Discover the World of Tea: Soon Unveiling the Simply Steeped Tea Blog!
         </h1>
-        <h2 className="mt-6 text-lg tracking-tight text-white sm:text-5xl">
+        <h2 className="mt-6 text-2xl tracking-tight text-white sm:text-5xl">
           Initiate your journey into the world of tea with us!
         </h2>
-        <h3 className="mt-6 mb-6 text-base leading-7 text-gray-100">
+        <h3 className="mt-6 mb-6 text-2xl leading-7 text-gray-100">
           Coming soon!
         </h3>
       </div>
@@ -86,8 +86,8 @@ function App() {
           sec
         </div>
       </div>
-      <div className="text-center pt-14">
-        <h2 className="p-4 mt-6 text-lg tracking-tight text-white sm:text-3xl">
+      <div className="text-center pt-8">
+        <h2 className="p-4 mt-6 text-2xl tracking-tight text-white sm:text-3xl">
           In the meantime, follow us on social media to stay up to date with the
           latest!
         </h2>
