@@ -1,5 +1,7 @@
 import { PlusCircleIcon } from "@heroicons/react/24/outline";
+import { useState } from "react";
 import logo from "../public/Logo.png";
+// import { subscribeUser } from "../api/email";
 
 const features = [
   {
@@ -23,11 +25,54 @@ const features = [
       "Embark on a journey through the rich history and culture of tea. Explore traditions from ancient ceremonies to modern tea innovations.",
   },
 ];
+
 // #10100f (black),
 // #457d58 (green),
 // #f6f6e9 (oatmeal)
 
-export default function Landing() {
+const Landing = ({ setSuccess, userEmail, setUserEmail }) => {
+  const [isValid, setIsValid] = useState(true);
+  const [disabled, setDisabled] = useState(true);
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  const validateEmail = (e) => {
+    setUserEmail(e.target.value);
+    setIsValid(emailRegex.test(e.target.value));
+    setDisabled(!emailRegex.test(e.target.value));
+  };
+
+  const subscribeUser = async (email) => {
+    try {
+      const response = await fetch("http://localhost:3001/subscribe", {
+        method: "POST",
+        body: JSON.stringify({ email }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+
+      const data = await response.json();
+    } catch (error) {
+      console.error("There was a problem with your fetch operation:", error);
+    }
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (emailRegex.test(userEmail)) {
+      setUserEmail(userEmail);
+      subscribeUser(userEmail);
+      setSuccess(true);
+      return setUserEmail(userEmail);
+    }
+    return;
+  };
+
   return (
     <div className="bg-oatmeal">
       <header className="bg-leaf absolute inset-x-0 top-0 z-50">
@@ -39,7 +84,7 @@ export default function Landing() {
             <a href="#" className="-m-1.5 p-1.5">
               <span className="sr-only">SimplySteeped - Tea Blog</span>
               <img
-                className="h-8 w-auto"
+                className="h-10 w-auto"
                 src={logo}
                 alt="SimplySteeped - Tea Blog"
               />
@@ -176,36 +221,50 @@ export default function Landing() {
               <p className="mx-auto mt-2 max-w-xl text-center text-lg leading-8 text-gray-300">
                 Brews and News: Subscribe to our newsletter for the latest in
                 tea trends, tips, and exclusive content. Stay up-to-date with
-                the evolving world of tea, from brewing secrets to wellness
-                insights, all delivered straight to your inbox
+                the evolving world of tea, all delivered straight to your inbox.
               </p>
               <form
-                className="mx-auto mt-10 flex max-w-md gap-x-4"
-                noValidate=""
+                className="mx-auto mt-10 flex max-w-md gap-x-4 flex-wrap"
                 acceptCharset="UTF-8"
-                method="post"
-                action="https://link.mail.tailwindapp.com/ngs/1410258/7I3FqDdu0DsTcSS2bkGr/embedded"
+                id="mc-embedded-subscribe-form"
+                name="mc-embedded-subscribe-form"
+                target="_blank"
+                action={
+                  "https://simplysteeped.us21.list-manage.com/subscribe/post?u=1dc82b4948ffc044907e8b1a7&amp;id=39073a9c47&amp;f_id=0093f4e6f0"
+                }
               >
                 <label htmlFor="email-address" className="sr-only">
                   Email address
                 </label>
+
                 <input
-                  id="email-address"
-                  name="email"
+                  className="min-w-0 flex-auto rounded-md border-0 bg-white/5 px-3.5 py-2 text-black ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-white sm:text-sm sm:leading-6"
                   type="email"
                   autoComplete="email"
-                  required
-                  className="min-w-0 flex-auto rounded-md border-0 bg-white/5 px-3.5 py-2 text-oatmeal ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-white sm:text-sm sm:leading-6"
                   placeholder="Enter your email"
+                  aria-label="Email address"
+                  required
+                  value={userEmail}
+                  onChange={validateEmail}
                 />
                 <button
+                  onClick={handleSubmit}
                   type="submit"
+                  disabled={disabled}
                   aria-label="SimplySteeped Newsletter Submit button"
                   title="SimplySteeped Newsletter Submit button"
-                  className="bg-leaf flex-none rounded-md px-3.5 py-2.5 text-sm font-semibold text-oatmeal focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+                  className="bg-leaf flex-none rounded-md px-3.5 py-2.5 text-sm font-semibold text-oatmeal focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white hover:bg-black transition duration-150 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   Notify me
                 </button>
+                {!isValid && (
+                  <label
+                    className="basis-full text-red text-sm font-semibold p-1"
+                    htmlFor="user_email_invalid"
+                  >
+                    Valid email required
+                  </label>
+                )}
               </form>
             </div>
           </div>
@@ -213,4 +272,6 @@ export default function Landing() {
       </main>
     </div>
   );
-}
+};
+
+export default Landing;

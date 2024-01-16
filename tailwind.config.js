@@ -9,7 +9,7 @@ export default {
       leaf: "#457D58",
       oatmeal: "#F6F6E9",
       black: "#10100F",
-      red: "#c13584",
+      red: "#d61313",
     },
     extend: {},
   },
