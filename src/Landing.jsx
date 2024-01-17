@@ -54,8 +54,6 @@ const Landing = ({ setSuccess, userEmail, setUserEmail }) => {
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }
-
-      const data = await response.json();
     } catch (error) {
       console.error("There was a problem with your fetch operation:", error);
     }
@@ -134,7 +132,7 @@ const Landing = ({ setSuccess, userEmail, setUserEmail }) => {
         <div className="text-center py-8">
           <a
             className="p-4"
-            href="https://www.facebook.com/SimplySteeped/"
+            href="https://www.facebook.com/profile.php?id=61555271277926"
             aria-label="SimplySteeped Facebook"
             target="_blank"
           >
