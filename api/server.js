@@ -24,7 +24,7 @@ app.post("/subscribe", async (req, res) => {
       process.env.MAILCHIMP_LIST_ID,
       {
         email_address: email,
-        status: "pending", // or "subscribed" based on your preference
+        status: "pending",
       }
     );
 
