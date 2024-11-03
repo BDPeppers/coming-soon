@@ -1,3 +1,5 @@
+Tutorial Article: https://medium.com/@peppersbre/integrating-the-mailchimp-api-with-a-vite-react-app-8ca3cda88d6c
+
 ## React + Vite + Tailwind + Express
 
 Coming soon site for [wwww.simplysteeped.com](https://www.simplysteeped.com/)
